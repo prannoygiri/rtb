@@ -33,15 +33,13 @@ public class ElasticService {
 
     public List<AdRequest> search(AdRequest adRequest) {
 
-        logger.info("Searching ad request");
         logger.info("Creating Search Criteria");
 
         List<Criteria> criteriaList = new ArrayList<>();
 
-        logger.info("Creating Search Criteria");
-
         //ID search
         if(adRequest.getId() != null) {
+            logger.info("Creating Search Criteria with id : " + adRequest.getId());
             criteriaList.add(Criteria.where("id").is(adRequest.getId()));
         }
 
@@ -49,11 +47,14 @@ public class ElasticService {
         if(adRequest.getImp() != null) {
             for(AdRequest.Imp imp : adRequest.getImp()) {
                 if(imp.getId() != null) {
+                    logger.info("Creating Search Criteria with imp.id : " + imp.getId());
                     criteriaList.add(Criteria.where("imp.id").is(imp.getId()));
                 }
                 if(imp.getTagid() != null) {
+                    logger.info("Creating Search Criteria with imp.tagid : " + imp.getTagid());
                     criteriaList.add(Criteria.where("img.tagid").is(imp.getTagid()));
                 }
+                
             }
         }
 
@@ -61,14 +62,17 @@ public class ElasticService {
         if(adRequest.getDevice() != null) {
             AdRequest.Device device = adRequest.getDevice();
             if(device.getMake() != null) {
+                logger.info("Creating Search Criteria with device.make : " + device.getMake());
                 criteriaList.add(Criteria.where("device.make").is(device.getMake()));
             }
             if(device.getGeo() != null) {
                 AdRequest.Geo geo = device.getGeo();
                 if(geo.getLat() != null) {
+                    logger.info("Creating Search Criteria with device.geo.lat : " + geo.getLat());
                     criteriaList.add(Criteria.where("device.geo.lat").is(geo.getLat()));
                 }
                 if(geo.getLon() != null) {
+                    logger.info("Creating Search Criteria with device.geo.lon : " + geo.getLon());
                     criteriaList.add(Criteria.where("device.geo.lon").is(geo.getLon()));
                 }
             }
@@ -78,9 +82,11 @@ public class ElasticService {
         if(adRequest.getApp() != null) {
             AdRequest.App app = adRequest.getApp();
             if(app.getId() != null) {
+                logger.info("Creating Search Criteria with app.id : " + app.getId());
                 criteriaList.add(Criteria.where("app.id").is(app.getId()));
             }
             if(app.getName() != null) {
+                logger.info("Creating Search Criteria with app.name : " + app.getName());
                 criteriaList.add(Criteria.where("app.name").is(app.getName()));
             }
         }
@@ -89,6 +95,7 @@ public class ElasticService {
         if(adRequest.getUser() != null) {
             AdRequest.User user = adRequest.getUser();
             if(user.getId() != null) {
+                logger.info("Creating Search Criteria with user.id : " + user.getId());
                 criteriaList.add(Criteria.where("user.id").is(user.getId()));
             }
         }
@@ -112,7 +119,6 @@ public class ElasticService {
     public AdRequest upload(AdRequest adRequest) {
         logger.info("Uploading AdRequest inside Elasticsearch serivce");
         AdRequest result = adRequestRepository.save(adRequest);
-        logger.info("AdRequest saved inside Elasticsearch serivce", result);
         if(result != null) {
             return result;
         }

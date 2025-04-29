@@ -46,7 +46,7 @@ You should see three container running.
 
 -----------------------------------------------------------
 
-### API Deatils 
+### API Deatils
 
 There are three API:
 
@@ -58,10 +58,18 @@ curl -X GET http://localhost:8080/api/checkconnection
 
 curl -X POST -H 'Content-Type: application/json' -d '{ RTB_REQUEST }'
 
-3. The Third API is to search for the RTB Request
+
+. The Third API is to search for the RTB Request
 
 curl -X POST -H 'Content-Type: application/json' -d '{ RTB_REQUEST_PARAMETERS }'
 
+### Example Request at location
 
+project_location/example_request/
+
+
+### Kibana Dashboard
+
+http://localhost:5601
 
 
