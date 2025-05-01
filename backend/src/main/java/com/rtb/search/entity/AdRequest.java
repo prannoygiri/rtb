@@ -24,7 +24,7 @@ public class AdRequest {
         private Banner banner;
         private Integer instl;
         private String tagid;
-        private double bidfloor;
+        private Double bidfloor;
     }
 
     @Data
